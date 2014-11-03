@@ -1,7 +1,7 @@
 ---
 layout: post
 category: work
-tagline: "每次结束都是新的开始"
+tagline: "end is start"
 tags: [meituan]
 ---
 {% include JB/setup %}
