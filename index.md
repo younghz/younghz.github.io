@@ -1,6 +1,6 @@
 ---
 layout: page
-title: All posts 
+title: 文章列表 
 ---
 {% include JB/setup %}
 
@@ -12,8 +12,6 @@ title: All posts
       </span> &raquo;  
       <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}
       </a>
-      <p>{{ post.excerpt }}
-      </p>
     </li>
   {% endfor %}
 </ul>
