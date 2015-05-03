@@ -1,12 +1,12 @@
-  ---
-  layout: post
-  title: "2015-5-3-和而不同，git rebase 和 git merge.md"
-  tagline: ""
-  description: ""
-  category: skill
-  tags: [mt]
-  ---
-  {% include JB/setup %}
+---
+layout: post
+title: "2015-5-3-和而不同，git rebase 和 git merge.md"
+tagline: ""
+description: ""
+category: skill
+tags: [mt]
+---
+{% include JB/setup %}
 
 
 > You ask me a question, I tell you a story.    
