@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2015-5-3-和而不同，git rebase 和 git merge.md"
+title: "和而不同，git rebase 和 git merge.md"
 tagline: ""
 description: ""
 category: skill
