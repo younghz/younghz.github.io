@@ -47,7 +47,7 @@ git init
 
 ###3，首先我把nb1先合并到master分支上.使用git merge.
 **合并完成后的log graph:**    
-![nb1 log](https://github.com/younghz/ResourceForBlog/blob/master/git_rebase_and_git_merge/nb1%20lg.png)
+![nb1 log](/resource/nb1_log.png)
  
 
 >下面的操作就可以看出不同了。
@@ -63,7 +63,7 @@ git checkout master
 git merge nb2    
 
 **这时得到的log graph 是这样的：**    
-![master log](https://github.com/younghz/ResourceForBlog/blob/master/git_rebase_and_git_merge/master%20nb2%20rebase.png)
+![master log](/resource/merge_non_fastforward.png)
  
 ###5, 使用merge
 这里，在nb2分支上不rebase，直接切换到master分支上合并。
@@ -72,7 +72,7 @@ git merge nb2
 git merge nb2
 
 **效果图是这样的：**    
-![rebase](https://github.com/younghz/ResourceForBlog/blob/master/git_rebase_and_git_merge/merge(non-fastfoward).png)
+![rebase](/resource/master_nb2_rebase.png)
  
 ### 6，不同点清自行对比上两幅图
 
