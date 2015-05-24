@@ -38,7 +38,7 @@ git init
 
 > 此时二者是同时从master分支上checkout出来的，所以二者的base是一致的。
 
-![prepare job.png](/resource/git_rebase_and_git_merge/prepare\ job.png)
+![prepare job.png](/resource/git_rebase_and_git_merge/prepare_job.png)
 
 **这时nb1和nb2的log graph形状都是这样的：**
 
