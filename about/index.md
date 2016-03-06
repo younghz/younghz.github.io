@@ -3,4 +3,6 @@ layout: page
 title: About
 ---
 
-Bolg for haizhi.
+Campus**: HEU    
+**Email**: younghaizhi@gmail.com
+
