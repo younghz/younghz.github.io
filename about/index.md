@@ -3,6 +3,7 @@ layout: page
 title: About
 ---
 
-Campus**: HEU    
+**Campus**: HEU    
 **Email**: younghaizhi@gmail.com
+**Company**: MT
 
