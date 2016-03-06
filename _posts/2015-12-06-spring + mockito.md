@@ -1,12 +1,7 @@
---- 
-layout: post 
-title: "spring + mockito" 
-tagline: "注入bean的mock" 
-description: "" 
-category: java 
-tags: [java] 
---- 
-{% include JB/setup %}
+---
+layout: post
+title: "spring + mockito"
+---
 
 
 ```java
@@ -29,7 +24,7 @@ public class ServiceTest extends AbstractJunitTest{
             MockResult mockResult = new MockResult();
             mockResult.setxxx();
 
-            // 3. when - then 
+            // 3. when - then
             when(toBeMockService.invoke(any(Param.class))).thenReturn(mockResult);  
 
             // 4. 替换注入的bean

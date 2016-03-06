@@ -1,11 +1,7 @@
 ---
 layout: post
 title: "Resource of Programming"
-description: ""
-category: Programming
-tags: [resource]
 ---
-{% include JB/setup %}
 
 #### Java:    
 + Google java编程风格。[http://www.hawstein.com/posts/google-java-style.html](http://www.hawstein.com/posts/google-java-style.html)

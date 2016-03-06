@@ -1,12 +1,7 @@
---- 
-layout: post 
-title: "git commit msg 最佳实践" 
-tagline: "commit 与 tag " 
-description: "" 
-category: git 
-tags: [git] 
---- 
-{% include JB/setup %}
+---
+layout: post
+title: "git commit msg 最佳实践"
+---
 
 # 1 git commit 要求
 
@@ -22,7 +17,7 @@ git commit -m “[盖房子]装修”
 git commit -m “[盖房子]娶老婆”
 
 //3. 如果你把你的task号也粘在了你的commit 信息里，bigger就又高了一级，git和task系统会自动链接过去
-git commit -m “[盖房子]打地基  task” 
+git commit -m “[盖房子]打地基  task”
 
 //4 一定记得，为了让你的commit尽可能的挨在一起，一定要做rebase
 

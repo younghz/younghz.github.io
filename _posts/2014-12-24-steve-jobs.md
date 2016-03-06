@@ -1,12 +1,7 @@
 ---
 layout: post
 title: "看《史蒂夫乔布斯传》"
-description: ""
-category: book
-tagline: 那些疯狂到以为自己能够改变世界的人，才能够真正改变世界。
-tags: [book]
 ---
-{% include JB/setup %}
 
 看完了乔布斯传，从其本人和apple公司两方面总结一下。
 

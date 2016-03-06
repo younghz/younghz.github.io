@@ -1,16 +1,11 @@
 ---
 layout: post
 title: "Something improving bigger"
-tagline: "我要bigger"
-description: ""
-category: thinking
-tags: [book]
 ---
-{% include JB/setup %}
 
 ### 算法
 
-#### 商品推荐方法 
+#### 商品推荐方法
 
 * 其一是**以人为本**，找到**与你相似的人**，看看他们买了什么东西你没买，然后像你推荐，理论基础：**多维空间两个向量夹角余弦公式**，夹角余弦=向量点积/向量模的叉乘。
 

@@ -1,11 +1,7 @@
 ---
 layout: post
-category: work
-tagline: "end is start"
-tags: [meituan]
+title: new
 ---
-{% include JB/setup %}
 
 mt, I am coming!    
                 14.9.28
-

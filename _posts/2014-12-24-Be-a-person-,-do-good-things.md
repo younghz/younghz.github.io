@@ -1,11 +1,7 @@
 ---
 layout: post
 title: Be a person, do good things.
-category: life
-tagline: 尽人事
-tags: [life]
 ---
-{% include JB/setup %}
 
 ### Be a person
 

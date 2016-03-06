@@ -1,12 +1,7 @@
---- 
-layout: post 
-title: "elasticsearch重启" 
-tagline: "记一次重启记录" 
-description: "" 
-category: search 
-tags: [search] 
---- 
-{% include JB/setup %}
+---
+layout: post
+title: "elasticsearch重启"
+---
 
 ## 0 准备工作
 ###0.1 安装elasticsearch-sql
@@ -52,7 +47,7 @@ PUT /_cluster/settings
 ```java
 curl -XPOST ‘http://localhost:8416/_cluster/nodes/_local/_shutdown’
 ```
-                   
+
 ##3 启动
 手动bin目录下启动，并在head上确认其已经加入集群。
 

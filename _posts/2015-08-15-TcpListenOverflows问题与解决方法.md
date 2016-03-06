@@ -1,12 +1,7 @@
---- 
-layout: post 
-title: "TcpListenOverFlows问题与解决方法" 
-tagline: "运维" 
-description: "" 
-category: 运维 
-tags: [运维] 
---- 
-{% include JB/setup %}
+---
+layout: post
+title: "TcpListenOverFlows问题与解决方法"
+---
 
 ### 问题现象
 

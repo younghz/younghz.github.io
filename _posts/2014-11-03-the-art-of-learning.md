@@ -1,12 +1,7 @@
 ---
 layout: post
 title: "The art of learning"
-tagline: "学习是种能力"
-description: ""
-category: book
-tags: [book]
 ---
-{% include JB/setup %}
 
 >这种学习经历（指太极）和我学习象棋有点类似。我把所有时间都放在了学习技巧原理和理论上，使之成为**潜意识**的一部分。
 
