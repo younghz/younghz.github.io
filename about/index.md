@@ -4,6 +4,6 @@ title: About
 ---
 
 **Campus**: HEU    
-**Email**: younghaizhi@gmail.com
+**Email**: younghaizhi@gmail.com    
 **Company**: MT
 
