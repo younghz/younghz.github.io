@@ -1,0 +1,90 @@
+<blockquote>
+  <p>You ask me a question, I tell you a story.  <br />
+                                                            — from null</p>
+</blockquote>
+
+<p>这里也讲一下自己的理解。</p>
+
+<blockquote>
+  <p>本文所述主分支指Master或者develop分支，新分支指feature-<em>或者bugfix-</em>分支。</p>
+</blockquote>
+
+<h1 id="section">原理</h1>
+
+<ul>
+  <li>注意rebase这个词，git上将其翻译为“定基”。这就是git rebase的作用，原来我checkout出来的基（base）是commit1，但是在我合并时我可以将我的base定到更新的commit上，反应到log上就是不会使主分支出现过多的分岔。</li>
+  <li>当你使用merge合并分支时，实际是又在 上做了一个commit。但是使用rebase就不会出现额外的commit。而这点你可以看log graph。</li>
+  <li>Fast-Forward。使用rebase处理新分支在合并到主分支上是Fast-Forward的，但是直接合并是non Fast-Forward。</li>
+</ul>
+
+<h2 id="section-1">二者的同</h2>
+<p><strong>相同点显而易见，都是用作分支的合并。</strong></p>
+
+<h2 id="section-2">二者的不同</h2>
+<p>下面是操作的步骤，从最后的结果可以看出不同点。</p>
+
+<h3 id="section-3">1，首先进行一些基本操作</h3>
+<blockquote>
+  <p>//新建文件夹并git初始化  <br />
+mkdir test  <br />
+cd test  <br />
+git init</p>
+</blockquote>
+
+<h3 id="masternb1nb2commit">2，在分支master上新建分支nb1和nb2，并且每个分支上做了两个commit。</h3>
+
+<blockquote>
+  <p>此时二者是同时从master分支上checkout出来的，所以二者的base是一致的。</p>
+</blockquote>
+
+<p><img src="/resource/git_rebase_and_git_merge/prepare_job.png" alt="prepare job.png" /></p>
+
+<p><strong>这时nb1和nb2的log graph形状都是这样的：</strong></p>
+
+<blockquote>
+  <p>接下来我是要把分支nb1和nb2的改动都合并到master分支上。</p>
+</blockquote>
+
+<h3 id="nb1mastergit-merge">3，首先我把nb1先合并到master分支上.使用git merge.</h3>
+<p><strong>合并完成后的log graph:</strong>  <br />
+<img src="/resource/git_rebase_and_git_merge/nb1_log.png" alt="nb1 log" /></p>
+
+<blockquote>
+  <p>下面的操作就可以看出不同了。</p>
+</blockquote>
+
+<h3 id="rebase">4，使用rebase的效果。</h3>
+<p>首先，我先rebase master，这也是我们酒店代码提交所要求的。</p>
+
+<blockquote>
+  <p>//在nb2分支上做的操作  <br />
+git rebase master</p>
+</blockquote>
+
+<blockquote>
+  <p>//切换到master分支合并  <br />
+git checkout master  <br />
+git merge nb2</p>
+</blockquote>
+
+<p><strong>这时得到的log graph 是这样的：</strong>  <br />
+<img src="/resource/git_rebase_and_git_merge/merge_non_fastforward.png" alt="master log" /></p>
+
+<h3 id="merge">5, 使用merge</h3>
+<p>这里，在nb2分支上不rebase，直接切换到master分支上合并。</p>
+
+<blockquote>
+  <p>git checkout master
+git merge nb2</p>
+</blockquote>
+
+<p><strong>效果图是这样的：</strong>  <br />
+<img src="/resource/git_rebase_and_git_merge/master_nb2_rebase.png" alt="rebase" /></p>
+
+<h3 id="section-4">6，不同点清自行对比上两幅图</h3>
+
+<h1 id="section-5">其他</h1>
+<p><strong>有人说为什么不在主分支做rebase?而且所有合并代码的工具默认使用的都是merge操作？</strong></p>
+
+<p>大部分情况下在主分支上做合并操作的和新分支开发的根本就不是一个人，所以合并操作的人根本不熟悉你的分支，那么他根本就不应该重新定义你所做的改动的base。他若改了，你定会心里说上无数遍：   <br />
+<strong>不熟悉老子代码还要乱改老子commit的base，你你你你。。。。</strong></p>

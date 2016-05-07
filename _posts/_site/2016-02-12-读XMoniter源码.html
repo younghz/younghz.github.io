@@ -1,0 +1,16 @@
+<p>对外暴露XMonitor，包含供用户使用的api。</p>
+
+<ul>
+  <li>维护在进程中的是XMonitorAgent。其中使用ScheduledExecutorService定时进行任务调度。</li>
+  <li>其中任务是串行收集、上报信息。</li>
+  <li>其中收集和上报分别实现各自基类IXMonitorCollector和IXMonitorStore。</li>
+  <li>其中串行是通过遍历List&lt; IXMonitorCollector&gt;和List&lt; IXMonitorStore&gt;的接口方法实现。</li>
+</ul>
+
+<p>其他：</p>
+
+<ul>
+  <li>Atomic Number使用。</li>
+  <li>使用Properties类获取配置文件配置。</li>
+  <li>通过XXWarper包装基类，使用extends，使其更易用。</li>
+</ul>

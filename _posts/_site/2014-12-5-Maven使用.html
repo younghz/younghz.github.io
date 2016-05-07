@@ -1,0 +1,168 @@
+<h2 id="maven">Maven是什么</h2>
+<p>英文单词为_专家_的意思。  <br />
+一款开源的，特别是针对java的构建工具。  <br />
+可以执行<strong>清理、编译、测试、打包、部署</strong>一条龙。</p>
+
+<h2 id="mavenunix-">Maven安装(unix 平台)</h2>
+
+<h3 id="section">基本安装</h3>
+<blockquote>
+  <p>其中下文中的<code>version</code>都是指maven版本，在实际中用安装版本号替代。</p>
+</blockquote>
+
+<h5 id="mavenjdkjdk">Maven因为要执行编译等工作，所以依赖于<code>JDK</code>,首先查看<code>JDK</code>安装：</h5>
+
+<pre><code>echo $JAVA_HOME
+java -version
+</code></pre>
+
+<h5 id="maven-1">下载Maven安装文件</h5>
+
+<pre><code>//移到安装目录
+mv maven-package.tar.gz detination_file
+//解压
+tar xvf maven-package.tar.gz
+//创建符号链接，方便日后升级，一种普适性的软件安装方式，不必每次升级都更新环境变量
+ln -s package_file apache-maven
+
+//设置环境变量，在相应shell rc文件中增加
+export M`version`_HOME=$HOME/.../apache-maven
+export PATH=$HOME:M\__version_\_HOME/bin
+</code></pre>
+
+<h5 id="section-1">检测安装情况</h5>
+
+<pre><code>echo $M`version`_HOME
+mvn -v
+</code></pre>
+
+<h3 id="maven-2">Maven目录结构解析</h3>
+<p>有bin,boot,conf,lib四个主要文件，其中  <br />
+bin:含有mvn运行脚本。  <br />
+boot:Maven使用其中的文件加载类库，和用户无关。  <br />
+conf:其中包含全局定制Maven行为的文件<code>setting.xml</code>,将其copy到用户目录下</p>
+
+<pre><code>cp setting.xml ~/.m`version`/
+</code></pre>
+
+<p>注意setting.xml是用来配置Maven的，而后面所要说的pom.xml使用来配置项目的。</p>
+
+<p>lib: Maven运行需要的java库</p>
+
+<h3 id="http">设置HTTP代理</h3>
+<p>通过设置.m<code>version</code>文件夹下的settings.xml文件，在文件中增加相应内容（具体内容google）。</p>
+
+<h3 id="eclipse">eclipse插件</h3>
+<p>其插件名为m2eclipse,可通过eclipse-&gt;help-&gt;install new software安装。</p>
+
+<h2 id="maven-3">Maven使用</h2>
+<p>Maven的使用需遵循特定的文件结构（项目骨架），可用Archetype生成，命令为：</p>
+
+<pre><code>mvn archetype:gennerate
+</code></pre>
+
+<p>输入需要的信息：</p>
+
+<pre><code>groupId:
+//组ID,一般格式如com.google.myapp
+artifactId:
+//项目ID，如hello-world
+version:
+//项目版本，如1.0-SNAPSHOT
+package:
+//如com.mtht.pro
+</code></pre>
+
+<p>上面三个称为项目基本坐标，是在Maven中区分项目的标志。  <br />
+如上生成的Maven基本结构为：  <br />
+hello-world文件夹，根目录下用于配置项目的pom.xml，放置项目代码的/src/main/java,放置测试代码的/src/test/java。</p>
+
+<h3 id="section-2">编写主代码</h3>
+<p>在src/main/java下编写/com/mtht/pro/helloworld/HelloWorld.java文件。</p>
+
+<pre><code>package com.mtht.pro.helloworld;
+
+public class HelloWorld
+{
+    public String sayHello()
+    {
+        return "hello maven."
+    }
+}
+
+public static void main(String[] args)
+{
+    System.out.println(sayHello());
+}
+</code></pre>
+
+<p>执行<code>mvn clean compile</code>,clean为清理target目录，compile编译代码。</p>
+
+<h3 id="section-3">编写测试代码</h3>
+<p>因为要依赖JUnit，所以要在pom.xml中配置，增加dependency:</p>
+
+<pre><code>...
+&lt;denpendencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;groupId&gt;
+    &lt;artfactId&gt;junit&lt;artifactId&gt;
+    &lt;version&gt;4.7&lt;version&gt;
+    &lt;scope&gt;test&lt;scope&gt;
+  &lt;/dependency&gt;
+&lt;/denpendencies&gt;
+...
+</code></pre>
+
+<p>进而编写测试代码。在src/test/java下编写HelloWorldTest.java</p>
+
+<pre><code>package com.mtht.pro.helloworld;
+
+import static.org.junit.Assert.assertEquals;
+import org.junit.Test
+
+public class HelloworldTest
+{
+    @Test
+    public static void main(String[] args)
+    {
+        HelloWorld helloWorld = new HelloWorld();
+        String result = helloWorld.sayHello();
+        assertEquals("hello maven.", result);
+    }
+}
+</code></pre>
+
+<p>运行<code>maven clean test</code>。</p>
+
+<h3 id="section-4">打包、安装、运行</h3>
+<p>运行<code>mvn clean package</code>执行打包，生成的jar在target/下。  <br />
+若想让maven项目使用到这个包，那么运行<code>maven clean install</code>，将jar安装到Maven的repo中。</p>
+
+<hr />
+<p><strong>注意:</strong> 生成的jar文件是不能运行的，可以查看jar中的META-INF/MANIFEST.MF中没有Main-Class一行，为了生成可执行jar文件，需要使用maven-shade-plugin工具，具体配置google。配置完执行<code>maven clean install</code>即可。</p>
+
+<hr />
+
+<h3 id="maven-4">Maven其它概念</h3>
+
+<h4 id="section-5">坐标和依赖</h4>
+<p>坐标即构件在Maven中的唯一表示。  <br />
+依赖即当前项目的dependency，它在pom.xml中定义，Maven有一套管理dependency的机制，能够解决传递性依赖等问题。</p>
+
+<h4 id="maven-5">Maven仓库</h4>
+<ul>
+  <li>
+    <p><strong>定义：</strong>统一管理构建的方式，被所有使用Maven的项目共享。其目录为Maven安装目录下的repository文件夹。其中的构件依靠<strong>坐标</strong>唯一进行区分。</p>
+  </li>
+  <li>
+    <p><strong>描述：</strong>仓库分为两类，本地仓库和远程仓库，远程仓库又分为Maven中央仓库，私服和其它公共库。远程仓库是默认配置的，若要是使用其它公共库，则需要在pom.xml中配置repositories字段。本地构建需执行maven install后安装到Maven中才能被是使用。</p>
+  </li>
+  <li>
+    <p><strong>仓库搜索服务</strong>：针对Maven的库的搜索服务: sonatype, jarvana, mvnrepository.</p>
+  </li>
+</ul>
+
+<hr />
+<p>几篇很好的资料：  <br />
+Apache maven 入门篇（上）  <br />
+Apache maven 入门篇（下）</p>
