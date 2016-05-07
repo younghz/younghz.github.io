@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Something improving bigger"
+title: "【resource】Something improving bigger"
 ---
 
 ### 算法
