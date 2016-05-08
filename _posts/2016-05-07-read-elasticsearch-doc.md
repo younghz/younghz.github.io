@@ -8,10 +8,11 @@ title: "【doc】Read elastic search doc"
 ## 1 描述
 
 > Elasticsearch也使用Java开发并使用 **Lucene作为其核心** 来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来 **隐藏** Lucene的复杂性，从而让全文搜索变得简单。    
-不过，Elasticsearch不仅仅是Lucene和全文搜索，我们还能这样去描述它：    
-* 分布式的实时文件存储，**每个字段** 都被索引并可被搜索    
-* 分布式的实时分析搜索引擎    
-* 可以扩展到上百台服务器，处理PB级 **结构化或非结构化** 数据
+不过，Elasticsearch不仅仅是Lucene和全文搜索，我们还能这样去描述它：
+
+> * 分布式的实时文件存储，**每个字段** 都被索引并可被搜索    
+> * 分布式的实时分析搜索引擎    
+> * 可以扩展到上百台服务器，处理PB级 **结构化或非结构化** 数据
 
 
 ## 2 shard & node & index 关系
@@ -30,7 +31,8 @@ title: "【doc】Read elastic search doc"
 文档
 > 它特指最顶层结构或者根对象(root object)序列化成的JSON数据（以唯一ID标识并存储于Elasticsearch中）。
 
-包含元数据：    
+包含元数据：  
+
 * index： 文档存储的地方。我们的数据被存储和索引在分片(shards)中，索引只是一个把一个或多个分片分组在一起的逻辑空间。blog    
 * type： 索引类型。blogContent/blogComments    
 * id： 唯一标识    
@@ -47,7 +49,8 @@ routing值是一个任意字符串，它默认是_id但也可以自定义。这�
 
 ## 5 写和读操作的分片路由逻辑
 
-基本逻辑是：    
+基本逻辑是：
+
 * 请求打到某个节点上。    
 * 节点根据id和路由规则找到对应的shard操作
 
@@ -59,7 +62,9 @@ http://es.xiaoleilu.com/040_Distributed_CRUD/20_Retrieving.html
 映射决定了这个字段的查询与分析。所以还是应该在存储之前将映射写好。
 
 如：
-```java
+
+```
+
 PUT /order
 {
   "mappings": {
@@ -113,7 +118,8 @@ PUT /order
 关于倒排索引：    
 http://blog.csdn.net/hguisu/article/details/7962350
 
-关键点就是：    
+关键点就是：  
+
 * 怎样由单词（字段值）找到文件（model）：倒排
 * 怎样找到单词：b-tree
 
@@ -136,12 +142,13 @@ http://blog.csdn.net/hguisu/article/details/7962350
 
 http://es.xiaoleilu.com/080_Structured_Search/05_term.html    
 
-> Elasticsearch 在内部会通过一些操作来执行一次过滤：    
-1. 查找匹配文档。    
+> Elasticsearch 在内部会通过一些操作来执行一次过滤：  
+
+1. **查找匹配文档。**    
 term 过滤器在倒排索引中查找词 XHDK-A-1293-#fJ3，然后返回包含那个词的文档列表。在这个例子中，只有文档 1 有我们想要的词。    
-2. 创建字节集    
+2. **创建字节集**    
 然后过滤器将创建一个 字节集 —— 一个由 1 和 0 组成的数组 —— 描述哪些文档包含这个词。匹配的文档得到 1 字节，在我们的例子中，字节集将是 [1,0,0,0]    
-3. 缓存字节集    
+3. **缓存字节集**    
 最后，字节集被储存在内存中，以使我们能用它来跳过步骤 1 和 2。这大大的提升了性能，让过滤变得非常的快。    
 当执行 filtered 查询时，filter 会比 query 早执行。结果字节集会被传给 query 来跳过已经被排除的文档。这种过滤器提升性能的方式，查询更少的文档意味着更快的速度。
 
@@ -175,12 +182,13 @@ should：至少有一个分句匹配，与 OR 相同。
 
 ####  什么样的过滤器会被缓存？
 
-首先，term和terms，exist这样的过滤器都会被缓存，但是range却不一定。在我们的查询中，我们用的range过滤器都是针对long型字段的，这种
+**首先**，term和terms，exist这样的过滤器都会被缓存，但是range却不一定。在我们的查询中，我们用的range过滤器都是针对long型字段的，这种
 可以被缓存，但是想range date的这种，如果有now这样的条件，就不会。可以拆成两个range查询。一个是查大于的，一个是查小于的，这样还至少
 能缓存一个range。    
+
 具体见：http://es.xiaoleilu.com/080_Structured_Search/40_bitsets.html
 
-其次，大部分直接处理字段的 **枝叶过滤器（例如 term）** 会被缓存，而像 **bool** 这类的组合过滤器则不会被缓存。
+**其次**，大部分直接处理字段的 **枝叶过滤器（例如 term）** 会被缓存，而像 **bool** 这类的组合过滤器则不会被缓存。
 
 #### filter的过滤顺序是很大的优化点。
 
