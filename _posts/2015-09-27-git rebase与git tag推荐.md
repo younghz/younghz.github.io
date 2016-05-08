@@ -7,7 +7,7 @@ title: "【Git】git commit msg 最佳实践"
 
 ## 1.1 git commit message要求
 
-```
+~~~~
 // 1. 每次提交把你的特性描述出来，如：
 git commit -m “[需求名]功能点”
 
@@ -20,15 +20,15 @@ git commit -m “[盖房子]娶老婆”
 git commit -m “[盖房子]打地基  task”
 
 //4 一定记得，为了让你的commit尽可能的挨在一起，一定要做rebase
-
-```
+~~~~
 
 ## 1.2统计特性的人
 
-```
+~~~~
 //其中<commit old id>和<commit new id> 是你想要统计的所有commit的首和尾id。
 git log --pretty=format:’%d %s  %cn’ <commit old id>..<commit new id> | grep “\[“ | awk -F’[‘ ‘{print $2}’ | sort | uniq
-```
+~~~~
+
 这样就能打印所有提交和提交人，去重的话在Uniq以下
 
 ## 1.3为什么要这样做
