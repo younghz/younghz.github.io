@@ -41,9 +41,9 @@ title: "【doc】Read elastic search doc"
 
 进程不能是随机的，因为我们将来要检索文档。事实上，它根据一个简单的算法决定：    
 
-```
+~~~~
 shard = hash(routing) % number_of_primary_shards
-```
+~~~~
 
 routing值是一个任意字符串，它默认是_id但也可以自定义。这个routing字符串通过哈希函数生成一个数字，然后除以主切片的数量得到一个余数(remainder)，余数的范围永远是0到number_of_primary_shards - 1，这个数字就是特定文档所在的分片。
 
@@ -63,7 +63,7 @@ http://es.xiaoleilu.com/040_Distributed_CRUD/20_Retrieving.html
 
 如：
 
-```
+~~~~
 
 PUT /order
 {
@@ -87,11 +87,11 @@ PUT /order
     }
   }
 }
-```
+~~~~
 
 如此创建后，name字段可直接通过term查询即可，如：
 
-```java
+~~~~
 {
     "filter": {
         "bool": {
@@ -103,7 +103,7 @@ PUT /order
         }
     }
 }
-```
+~~~~
 
 ## 7. 使用别名，零停机时间迁移索引
 
@@ -162,7 +162,7 @@ term 过滤器在倒排索引中查找词 XHDK-A-1293-#fJ3，然后返回包含�
 
 * 组合bool过滤器。这是以其他过滤器作为参数的组合过滤器，将它们结合成多种布尔组合。
 
-```
+~~~~
 bool过滤器的组成。
 
 {
@@ -176,7 +176,7 @@ bool过滤器的组成。
 must：所有分句都必须匹配，与 AND 相同。
 must_not：所有分句都必须不匹配，与 NOT 相同。
 should：至少有一个分句匹配，与 OR 相同。
-```
+~~~~
 
 ### 9.3 filter使用的优化点
 

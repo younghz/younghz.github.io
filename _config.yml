@@ -1,5 +1,14 @@
+title: yanghaizhi's Blog
+email: younghizhi@gmail.com
+
+
+highlighter: pygments
 markdown: kramdown
-highlighter: null
+kramdown:
+  input:         GFM
+  auto_ids:      true
+  auto_id_prefix: 'id-'
+
 permalink: /:title
 
 url:
