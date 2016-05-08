@@ -2,7 +2,7 @@ title: yanghaizhi's Blog
 email: younghizhi@gmail.com
 
 
-highlighter: pygments
+highlighter: rouge
 markdown: kramdown
 kramdown:
   input:         GFM
