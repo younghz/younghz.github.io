@@ -26,6 +26,7 @@ indices.cache.filter.size //这个配置默认值是总内存的 %10
 https://www.elastic.co/guide/en/elasticsearch/reference/1.7/index-modules-cache.html
 
 **配置方式二**
+
 网上很多资料的配置方式都是使用的都是 `index.cache.filter.type` 等配置。
 
 首先，应该使用配置一方式，在1.7的文档中并未对此种配置有说明。在 Master Elasticesarch书中找到的说明如下：
