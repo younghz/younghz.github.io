@@ -2,29 +2,27 @@
 
 <h2 id="git-commit-message">1.1 git commit message要求</h2>
 
-<p>```
-// 1. 每次提交把你的特性描述出来，如：
-git commit -m “[需求名]功能点”</p>
+<pre><code>// 1. 每次提交把你的特性描述出来，如：
+git commit -m “[需求名]功能点”
 
-<p>//2. 如果这个需求修改很多文件的话，就像被建议的，也为了不被review的人骂，就一个功能点一个功能点的提
+//2. 如果这个需求修改很多文件的话，就像被建议的，也为了不被review的人骂，就一个功能点一个功能点的提
 git commit -m “[盖房子]打地基”
 git commit -m “[盖房子]装修”
-git commit -m “[盖房子]娶老婆”</p>
+git commit -m “[盖房子]娶老婆”
 
-<p>//3. 如果你把你的task号也粘在了你的commit 信息里，bigger就又高了一级，git和task系统会自动链接过去
-git commit -m “[盖房子]打地基  task”</p>
+//3. 如果你把你的task号也粘在了你的commit 信息里，bigger就又高了一级，git和task系统会自动链接过去
+git commit -m “[盖房子]打地基  task”
 
-<p>//4 一定记得，为了让你的commit尽可能的挨在一起，一定要做rebase</p>
-
-<p>```</p>
+//4 一定记得，为了让你的commit尽可能的挨在一起，一定要做rebase
+</code></pre>
 
 <h2 id="section">1.2统计特性的人</h2>
 
-<p><code>
-//其中&lt;commit old id&gt;和&lt;commit new id&gt; 是你想要统计的所有commit的首和尾id。
+<pre><code>//其中&lt;commit old id&gt;和&lt;commit new id&gt; 是你想要统计的所有commit的首和尾id。
 git log --pretty=format:’%d %s  %cn’ &lt;commit old id&gt;..&lt;commit new id&gt; | grep “\[“ | awk -F’[‘ ‘{print $2}’ | sort | uniq
-</code>
-这样就能打印所有提交和提交人，去重的话在Uniq以下</p>
+</code></pre>
+
+<p>这样就能打印所有提交和提交人，去重的话在Uniq以下</p>
 
 <h2 id="section-1">1.3为什么要这样做</h2>
 

@@ -2,25 +2,22 @@
 <p>###0.1 安装elasticsearch-sql
 任意一台</p>
 
-<p><code>java
-./bin/plugin -u https://github.com/NLPchina/elasticsearch-sql/releases/download/1.4.8/elasticsearch-sql-1.4.8.zip --install sql
-</code></p>
+<pre><code>./bin/plugin -u https://github.com/NLPchina/elasticsearch-sql/releases/download/1.4.8/elasticsearch-sql-1.4.8.zip --install sql
+</code></pre>
 
 <p>有可能报错， 重试即可。还报错，就直接搞个包上去，目录为sql</p>
 
-<p><code>java
-Failed: UnknownHostException[github-cloud.s3.amazonaws.com]
+<pre><code>Failed: UnknownHostException[github-cloud.s3.amazonaws.com]
 Trying https://github.com/null/sql/archive/master.zip...
 Failed to install sql, reason: failed to download out of all possible locations..., use --verbose to get detailed information
-</code></p>
+</code></pre>
 
 <h3 id="section-1">0.2 增加配置项</h3>
 
 <p>所有机器</p>
 
-<p><code>java
-action.disable_delete_all_indices:true
-</code></p>
+<pre><code>action.disable_delete_all_indices:true
+</code></pre>
 
 <h3 id="es-falcon">0.3 安装 es-falcon插件</h3>
 
@@ -28,34 +25,31 @@ action.disable_delete_all_indices:true
 
 <h2 id="disable-shard-allocation">1 Disable shard allocation</h2>
 
-<p><code>
-PUT /_cluster/settings
+<pre><code>PUT /_cluster/settings
     {
     “transient” : {
     “cluster.routing.allocation.enable” : “none”
     }
 }
-</code></p>
+</code></pre>
 
 <h2 id="shutdown">2 shutdown</h2>
 
-<p><code>java
-curl -XPOST ‘http://localhost:8416/_cluster/nodes/_local/_shutdown’
-</code></p>
+<pre><code>curl -XPOST ‘http://localhost:8416/_cluster/nodes/_local/_shutdown’
+</code></pre>
 
 <h2 id="section-2">3 启动</h2>
 <p>手动bin目录下启动，并在head上确认其已经加入集群。</p>
 
 <h2 id="shard-allocation">4 启动 shard allocation</h2>
 
-<p><code>java
-PUT /_cluster/settings
+<pre><code>PUT /_cluster/settings
 {
     “transient” : {
     “cluster.routing.allocation.enable” : “all”
     }
 }
-</code></p>
+</code></pre>
 
 <p>观察并等待集群状态为green后继续操作。</p>
 

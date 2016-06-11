@@ -27,21 +27,20 @@
 子包引用不带版本号，同一管理依赖版本。
 如：</p>
 
-<p>```java
-// 父pom</p>
-<dependency>
-    <groupid>junit</groupid>
-    <artifactid>junit</artifactid>
-    <version>${junit.version}</version>
-    <scope>test</scope>
-</dependency>
+<pre><code>// 父pom
+&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;${junit.version}&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
 
-<p>// 子pom</p>
-<dependency>
-    <groupid>junit</groupid>
-    <artifactid>junit</artifactid>
-    </dependency>
-<p>&lt;/scope&gt;&lt;/version&gt;&lt;/artifactId&gt;&lt;/groupId&gt;
-&lt;/dependency&gt;</p>
 
-<p>```</p>
+// 子pom
+&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;/dependency&gt;&lt;/scope&gt;&lt;/version&gt;&lt;/artifactId&gt;&lt;/groupId&gt;
+&lt;/dependency&gt;
+
+</code></pre>
