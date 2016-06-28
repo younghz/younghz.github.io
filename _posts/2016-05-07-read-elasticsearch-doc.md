@@ -5,6 +5,19 @@ title: "【doc】Read elastic search doc"
 
 官方的doc无疑是最有价值的。
 
+## 0 关于倒排索引
+
+![倒排索引](../resource/es_invert_index/invertd index.png)
+
+在基本的文本处理后(分词/变小写等), 如上三个文档变成了如图的倒排索引.
+
+倒排索引将 “terms” 映射到 “doc” 上, 如图, 因为 terms 在 dictionary 中是有序的, 所以可以很快的找到这个词, 进而找到包含这个词的文档.
+
+在倒排索引结构中, term 是搜索的单元. 举个例子, 在如上的 dictionay 中, 我么可以高效的找到已 c 字母开头的词, 但是,找包含 ours 词却
+很困难, 因为这会遍历所有的 terms, 去找到像 yours 这样的词. 当索引很大时这种操作是十分好资源的.
+
+实际上, 在 es 中, 他为每一个 JSON 字段都建立了自己的倒排索引.
+
 ## 1 描述
 
 > Elasticsearch也使用Java开发并使用 **Lucene作为其核心** 来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来 **隐藏** Lucene的复杂性，从而让全文搜索变得简单。    
