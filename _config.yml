@@ -20,3 +20,6 @@ redcarpet:
 sass:
   sass_dir: public/css
   style: :compressed
+
+# Google services
+google_analytics: UA-53453742-1
