@@ -23,8 +23,7 @@ if (os.path.exists(fileName)):
 # create file
 print '\n创建文件' + fileName + '成功'
 toBeCreateFile = open(fileName, 'w');
-toBeWriteToFile = '''--- \nlayout: post \ntitle: "title name" \ntagline: "child title" \ndescription: "" \n\
-category: book \ntags: [book] \n--- \n{% include JB/setup %}'''
+toBeWriteToFile = '''--- \nlayout: post \ntitle: "title name"\n---'''
 
 try:
     toBeCreateFile.write(toBeWriteToFile)
