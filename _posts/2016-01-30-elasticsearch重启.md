@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【O&M】elasticsearch重启"
+title: "【T】elasticsearch重启"
 ---
 
 ## 0 准备工作

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【book】The art of learning"
+title: "【Book】The art of learning"
 ---
 
 >这种学习经历（指太极）和我学习象棋有点类似。我把所有时间都放在了学习技巧原理和理论上，使之成为**潜意识**的一部分。

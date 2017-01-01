@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【Git】git commit msg 最佳实践"
+title: "【T】git commit msg 最佳实践"
 ---
 
 # 1 git commit 要求

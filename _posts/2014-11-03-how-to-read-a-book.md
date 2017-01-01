@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【book】How to read a book"
+title: "【Book】How to read a book"
 ---
 
 上午去图书馆借书，看见展架上有《如何阅读一本书》，尽管已经看过，但是还是做了下来又捋了一遍。下面总结一二，作为自己以后阅读（任何种类）的原则。    

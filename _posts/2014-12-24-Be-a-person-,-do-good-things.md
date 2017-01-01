@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【work】Be a person, do good things.
+title: 【RT】Be a person, do good things.
 ---
 
 ### Be a person
