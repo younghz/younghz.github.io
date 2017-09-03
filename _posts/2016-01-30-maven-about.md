@@ -27,7 +27,7 @@ Maven的哲学是 「约定优于配置」，就像[Philosophy of Maven](https:/
 Maven的生命周期一般简单的分为validation、test、deployment三个阶段，更详细一些，一般可以细化为：
 process resources -> compile -> process classes -> process test resources -> test compile -> test -> prepare package -> package等，而每一个阶段都默认绑定了插件与目标操作，用来完成每个阶段的功能。并且默认来讲后一个阶段总会顺序的执行它之前的所有阶段，除非通过一定的方式排除掉。举个例子，mvn package 会执行它之前的所有阶段，但是如果你通过 -Dskip.test这种方式排除掉test阶段的话，那么也就排除了test阶段绑定的插件与目标的执行。
 
-![maven life and plugin](../resource/maven/maven_life.pnd)
+![maven life and plugin](../resource/maven/maven_life.png)
 
 **(3)项目坐标与仓库**
 
