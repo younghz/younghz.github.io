@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】JAVA并发编程（一）操作系统、进程、线程"
+title: "【T】JAVA并发编程 — 内存模型与线程"
 ---
 
 # 1 线程
