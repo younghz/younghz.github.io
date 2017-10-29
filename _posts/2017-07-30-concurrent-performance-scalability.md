@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】JAVA并发编程（三）性能与扩展性"
+title: "【T】Java并发编程 — 性能与扩展性"
 ---
 
 两个概念：
