@@ -11,7 +11,9 @@ title: "【T】Apache Maven"
 * 实践。
 * 总结。
 
-每一部分都要以概念开始。
+其中每一部分都要以概念开始。
+
+
 ----------
 
 ![Maven](../resource/maven/maven_logo.png)
