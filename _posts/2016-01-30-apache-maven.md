@@ -11,7 +11,7 @@ title: "【T】Apache Maven"
 * 实践。
 * 总结。
 
-每一部分都要以概念开始。
+每一部分都要以概念开始。以点带面，关注guideline，best practice和design pattern。
 
 
 ![Maven](../resource/maven/maven_logo.png)
