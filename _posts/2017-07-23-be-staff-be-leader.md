@@ -3,6 +3,9 @@ layout: post
 title: "【RT】做个好员工做个好Leader"
 ---
 
+* 目录
+{:toc}
+
 管理自己，管理团队。
 
 ## 1 最近的几点想法
