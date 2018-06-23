@@ -46,6 +46,17 @@ todo
 
 todo
 
+## Overview (介绍类)
+
+和 「使用文档」不同的是，Overview 可以作为「使用文档」的一部分，如果本身就相对复杂，那么可以作为独立的存在。其内容通常包括：
+* Get start：简要介绍或指向链接。
+* 特性总分介绍，先总在展开。
+* 设计哲学等。
+
+范本：[Spring Framework Overview](https://docs.spring.io/spring/docs/5.0.0.RC3/spring-framework-reference/overview.html)
+
+
+
 
 ----
 
