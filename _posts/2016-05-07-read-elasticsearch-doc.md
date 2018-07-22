@@ -110,7 +110,7 @@ PUT /order
         "bool": {
             "must": [
                {"term": {
-                  "name": "yanghaizhi"
+                  "name": "hz"
                }}
             ]
         }
