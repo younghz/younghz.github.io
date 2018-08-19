@@ -93,7 +93,7 @@ title: "【T】保险"
 买股票，才能有做韭菜的感受。
 买保险，才知道自己有多少注，愿意为自己标多少价。保险不重要，身体才重要。
 
-![health](../resource/health.jpeg)
+![health](../resource/health.png)
 
 
 
