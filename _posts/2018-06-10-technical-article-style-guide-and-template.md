@@ -35,27 +35,42 @@ title: "【T】技术文档写作规范与写作模板"
 
 ## 使用文档
 
+#### 1 概览（Overview）
+
+* 一段话阐述 xx 是什么。
+* Features 说明。包含什么特性。
+* Table of content。如果内容 3 部分内容较多，那么可在概览部分汇总列出。
+* 名词解释。如果包含较多领域名词，可以在此部分列出说明。
+* 使用要求。如对 JDK 版本、操作信息有要求。
+* 架构图。路程图。
+* 产品优势。
+* 核心场景。
+* 典型案例。
+* 设计哲学。
+
+#### 2 快速开始（Quick Start）
+
+要点是通过一定方式体现 step1-stepN。其中的方式可以是通过在代码行或者截图中标注 ① ② … 等数字标记。 
+
+#### 3 详细内容（Details）
+
+根据具体内容，通过递进形式阐述。比如，如果内容较零散，可以用 EhCache 这种 Basic Topic、General Topic、Advanced Topic；内容本身递进，可以用 Junit 这种 Writing Test、Running Test模式。
+
+#### 4 补充说明
+* Release Notes。
+* FAQ。
+* Contributors。
+等
+
+
 * [Ehcache](http://www.ehcache.org/documentation/3.5/index.html)
 * [Caffeine](https://github.com/ben-manes/caffeine/wiki)
+* [Spring Framework Overview](https://docs.spring.io/spring/docs/5.0.0.RC3/spring-framework-reference/overview.html)
 
-## 设计文档
-
-todo 
 
 ## 学习文档
 
 5W1H 法则。
-
-## Overview (介绍类)
-
-和 「使用文档」不同的是，Overview 可以作为「使用文档」的一部分，如果本身就相对复杂，那么可以作为独立的存在。其内容通常包括：
-* Get start：简要介绍或指向链接。
-* 特性总分介绍，先总在展开。
-* 设计哲学等。
-
-范本：[Spring Framework Overview](https://docs.spring.io/spring/docs/5.0.0.RC3/spring-framework-reference/overview.html)
-
-
 
 
 ----
