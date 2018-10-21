@@ -3,7 +3,9 @@ layout: post
 title: "【T】保险"
 ---
 
-![insurace](../resource/insurance/insurance.png)
+<p style="text-align:center">
+<img src="../resource/insurance/insurance.png" alt="insurance" width="300"/>
+</p>
 
 买保险的目的是「转移风险」。
 
@@ -93,8 +95,9 @@ title: "【T】保险"
 买股票，才能有做韭菜的感受。
 买保险，才知道自己有多少注，愿意为自己标多少价。保险不重要，身体才重要。
 
-![health](../resource/insurance/health.png)
 
 
-
+<p style="text-align: center;">
+	<img src="../resource/insurance/health.png" alt="health" width="300">
+</p>
 
