@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     colorator (0.1)
-    ffi (1.9.10)
+    ffi (>= 1.9.24)
     jekyll (>= 3.6.3)
       colorator (~> 0.1)
       jekyll-sass-converter (~> 1.0)
@@ -24,7 +24,7 @@ GEM
     mercenary (0.3.5)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
+      ffi (>= 1.9.24)
     redcarpet (3.3.4)
     rouge (1.10.1)
     safe_yaml (1.0.4)
