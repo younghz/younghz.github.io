@@ -45,39 +45,38 @@ Java 中的类加载器大致可以分成两类，一类是系统提供的，另
 ```java
 public Launcher() {
 
-   		// 1. 实例 ExtClassLoader
-        Launcher.ExtClassLoader var1;
-        try {
-            var1 = Launcher.ExtClassLoader.getExtClassLoader();
-        } catch (IOException var10) {
-            throw new InternalError("Could not create extension class loader", var10);
-        }
-
-        try {
-            // 实例 AppClassLoader，并通过参数 var1 设置 parent classLoader 为 ExtClassLoader
-            this.loader = Launcher.AppClassLoader.getAppClassLoader(var1);
-        } catch (IOException var9) {
-            throw new InternalError("Could not create application class loader", var9);
-        }
-        //...
+	// 1. 实例 ExtClassLoader
+    Launcher.ExtClassLoader var1;
+    try {
+        var1 = Launcher.ExtClassLoader.getExtClassLoader();
+    } catch (IOException var10) {
+        throw new InternalError("Could not create extension class loader", var10);
+    }
+    try {
+        // 实例 AppClassLoader，并通过参数 var1 设置 parent classLoader 为 ExtClassLoader
+        this.loader = Launcher.AppClassLoader.getAppClassLoader(var1);
+    } catch (IOException var9) {
+        throw new InternalError("Could not create application class loader", var9);
+    }
+    //...
  }
 ```
 
 AppClassLoader 并没有重写 Abstract 类 ClassLoader 的 getResource 方法，所以默认实现为如下，也就是先去 parent classLoader 也就是 ExtClassLoader 中加载，加载不到去 「virtual machine's built-in class loader」也就是 「bootstrap class loader」中加载，最后才在自己的 classLoader 中加载。
 
 ```java
-    public URL getResource(String name) {
-        URL url;
-        if (parent != null) {
-            url = parent.getResource(name);
-        } else {
-            url = getBootstrapResource(name);
-        }
-        if (url == null) {
-            url = findResource(name);
-        }
-        return url;
+public URL getResource(String name) {
+    URL url;
+    if (parent != null) {
+        url = parent.getResource(name);
+    } else {
+        url = getBootstrapResource(name);
     }
+    if (url == null) {
+        url = findResource(name);
+    }
+    return url;
+}
 ```
 
 ### 1.4 classpath
@@ -176,57 +175,57 @@ protected void launch(String[] args) throws Exception {
 		launch(args, getMainClass(), classLoader);
 	}
 
-  // 代码片段2
-  /**
-  * 从以下代码中可以发现，符合两种条件的 路径 构成了 classpath
-  * 1. BOOT-INF/classes/ 路径
-  * 2. BOOT-INF/lib/ 下的 Jar
-  * 
-  */
-	@Override
-	protected List<Archive> getClassPathArchives() throws Exception {
-		List<Archive> archives = new ArrayList<>(
-				this.archive.getNestedArchives(this::isNestedArchive));
-		postProcessClassPathArchives(archives);
-		return archives;
-	}
+// 代码片段2
+/**
+* 从以下代码中可以发现，符合两种条件的 路径 构成了 classpath
+* 1. BOOT-INF/classes/ 路径
+* 2. BOOT-INF/lib/ 下的 Jar
+* 
+*/
+@Override
+protected List<Archive> getClassPathArchives() throws Exception {
+	List<Archive> archives = new ArrayList<>(
+			this.archive.getNestedArchives(this::isNestedArchive));
+	postProcessClassPathArchives(archives);
+	return archives;
+}
 
-  // 代码片段3
-	@Override
-	public List<Archive> getNestedArchives(EntryFilter filter) throws IOException {
-		List<Archive> nestedArchives = new ArrayList<>();
-    // 这个类实现了 iterator 接口，这里的 this 实际上是调用下方的 iterator 方法（代码片段4），也就是
-    // 遍历 jarFile(也就是 spring boot fat jar，也就是 spring boot plugin 插件 repacke生成的 jar包) 的 entries
-    // 注意！！！！！！  jarFile 的 entries 是「有序的」，这个顺序是生成 Jar 的时候的写入 entry 的顺序，关于这里详细
-    // 描述见下方文字。
-		for (Entry entry : this) {
-			if (filter.matches(entry)) {
-				nestedArchives.add(getNestedArchive(entry));
-			}
+// 代码片段3
+@Override
+public List<Archive> getNestedArchives(EntryFilter filter) throws IOException {
+	List<Archive> nestedArchives = new ArrayList<>();
+   // 这个类实现了 iterator 接口，这里的 this 实际上是调用下方的 iterator 方法（代码片段4），也就是
+   // 遍历 jarFile(也就是 spring boot fat jar，也就是 spring boot plugin 插件 repacke生成的 jar包) 的 entries
+   // 注意！！！！！！  jarFile 的 entries 是「有序的」，这个顺序是生成 Jar 的时候的写入 entry 的顺序，关于这里详细
+   // 描述见下方文字。
+	for (Entry entry : this) {
+		if (filter.matches(entry)) {
+			nestedArchives.add(getNestedArchive(entry));
 		}
-		return Collections.unmodifiableList(nestedArchives);
 	}
+	return Collections.unmodifiableList(nestedArchives);
+}
 
-  // 代码片段4
-  /**
-  * 这个类实现了 iterator 接口
-  */
-	@Override
-	public Iterator<Entry> iterator() {
-		return new EntryIterator(this.jarFile.entries());
-	}
+// 代码片段4
+/**
+* 这个类实现了 iterator 接口
+*/
+@Override
+public Iterator<Entry> iterator() {
+	return new EntryIterator(this.jarFile.entries());
+}
 
-  // 代码片段5
-	static final String BOOT_INF_CLASSES = "BOOT-INF/classes/";
-	static final String BOOT_INF_LIB = "BOOT-INF/lib/";
-	
-	@Override
-	protected boolean isNestedArchive(Archive.Entry entry) {
-		if (entry.isDirectory()) {
-			return entry.getName().equals(BOOT_INF_CLASSES);
-		}
-		return entry.getName().startsWith(BOOT_INF_LIB);
+ // 代码片段5
+static final String BOOT_INF_CLASSES = "BOOT-INF/classes/";
+static final String BOOT_INF_LIB = "BOOT-INF/lib/";
+
+@Override
+protected boolean isNestedArchive(Archive.Entry entry) {
+	if (entry.isDirectory()) {
+		return entry.getName().equals(BOOT_INF_CLASSES);
 	}
+	return entry.getName().startsWith(BOOT_INF_LIB);
+}
 ```
 
 关于上面「代码片段3」中所说的 jarFile 的 entries 是有序的，且顺序为 entry 写入顺序问题，可以通过 vi 这个 jar包确认。SpringBoot 的测试类 `JarLauncherTests` 中，有生成 jarFile 的工具类，可以修改代码调整 entry 的写入顺序，下面是两种调整前后的对生成 jar 包 vi 的结果。
@@ -257,38 +256,37 @@ BOOT-INF/classes/ 路径 和 BOOT-INF/lib/ 下的 Jar 构成了 classpath，顺�
 * 这个参数 List 有序，其顺序如上所述
 */
 protected ClassLoader createClassLoader(List<Archive> archives) throws Exception {
-		List<URL> urls = new ArrayList<>(archives.size());
-		for (Archive archive : archives) {
-			urls.add(archive.getUrl());
-		}
-		return createClassLoader(urls.toArray(new URL[0]));
+	List<URL> urls = new ArrayList<>(archives.size());
+	for (Archive archive : archives) {
+		urls.add(archive.getUrl());
 	}
+	return createClassLoader(urls.toArray(new URL[0]));
+}
 
 /**
 * LaunchedURLClassLoader 使用有序的 URL 数组创建 classLoader
 * LaunchedURLClassLoader 的父类为 URLClassLoader, 上面的 URL[] 直接传递给父类构造器
 */
-	protected ClassLoader createClassLoader(URL[] urls) throws Exception {
-		return new LaunchedURLClassLoader(urls, getClass().getClassLoader());
-	}
+protected ClassLoader createClassLoader(URL[] urls) throws Exception {
+	return new LaunchedURLClassLoader(urls, getClass().getClassLoader());
+}
 
-
-    /**
-     * URLClassLoader 的构造器如下。使用 URLs 创建 URLClassLoader。在搜索 classes
-     * 和 resources 时候，URLClassLoader 使用的是 ClassLoader 的默认实现，也就是
-     * 逐层委托父 classLoader 查找后，查找不到后，开始查找自己。而查找自己的顺序为 URLs
-     * 这个数组的顺序，按照这个顺序不断向下查找。
-     */
-    public URLClassLoader(URL[] urls, ClassLoader parent) {
-        super(parent);
-        // this is to make the stack depth consistent with 1.1
-        SecurityManager security = System.getSecurityManager();
-        if (security != null) {
-            security.checkCreateClassLoader();
-        }
-        ucp = new URLClassPath(urls);
-        this.acc = AccessController.getContext();
+/**
+ * URLClassLoader 的构造器如下。使用 URLs 创建 URLClassLoader。在搜索 classes
+ * 和 resources 时候，URLClassLoader 使用的是 ClassLoader 的默认实现，也就是
+ * 逐层委托父 classLoader 查找后，查找不到后，开始查找自己。而查找自己的顺序为 URLs
+ * 这个数组的顺序，按照这个顺序不断向下查找。
+ */
+public URLClassLoader(URL[] urls, ClassLoader parent) {
+    super(parent);
+    // this is to make the stack depth consistent with 1.1
+    SecurityManager security = System.getSecurityManager();
+    if (security != null) {
+        security.checkCreateClassLoader();
     }
+    ucp = new URLClassPath(urls);
+    this.acc = AccessController.getContext();
+}
 ```
 
 ##### d. 进一步说 URLClassLoader 查找资源与类
@@ -310,19 +308,18 @@ URLClassLoader 类注释：
 URLClassLoader 的所有查找操作其实都委托给 URLClassPath，URLClassPath 是在创建 URLClassLoader时根据参数 URL[] 构建。
 
 ```java
-    public URL findResource(final String name) {
-        /*
-         * The same restriction to finding classes applies to resources
-         */
-        URL url = AccessController.doPrivileged(
-            new PrivilegedAction<URL>() {
-                public URL run() {
-                    return ucp.findResource(name, true);
-                }
-            }, acc);
-
-        return url != null ? ucp.checkURL(url) : null;
-    }
+public URL findResource(final String name) {
+    /*
+     * The same restriction to finding classes applies to resources
+     */
+    URL url = AccessController.doPrivileged(
+        new PrivilegedAction<URL>() {
+            public URL run() {
+                return ucp.findResource(name, true);
+            }
+        }, acc);
+    return url != null ? ucp.checkURL(url) : null;
+}
 ```
 
 URLClassPath 的 findResource 方法
@@ -330,44 +327,39 @@ URLClassPath 的 findResource 方法
 ```java
 // 代码片段1
 public URLClassPath(URL[] var1, URLStreamHandlerFactory var2) {
-        this.path = new ArrayList();
-        this.urls = new Stack();
-        // 实际的加载 class 或者 resource 文件的实现
-        // URL[] 中的每一个 URL 都对应实例一个 URLClassPath.Loader ，并且顺序和 参数 URL[] 顺序一致
-        // URLClassPath.Loader 使用 URL 作为查找的 basePath
-        this.loaders = new ArrayList();
-        this.lmap = new HashMap();
-        this.closed = false;
-
-        for(int var3 = 0; var3 < var1.length; ++var3) {
-            this.path.add(var1[var3]);
-        }
-
-        this.push(var1);
-        if (var2 != null) {
-            this.jarHandler = var2.createURLStreamHandler("jar");
-        }
-
-    }    
+    this.path = new ArrayList();
+    this.urls = new Stack();
+    // 实际的加载 class 或者 resource 文件的实现
+    // URL[] 中的每一个 URL 都对应实例一个 URLClassPath.Loader ，并且顺序和 参数 URL[] 顺序一致
+    // URLClassPath.Loader 使用 URL 作为查找的 basePath
+    this.loaders = new ArrayList();
+    this.lmap = new HashMap();
+    this.closed = false;
+    for(int var3 = 0; var3 < var1.length; ++var3) {
+        this.path.add(var1[var3]);
+    }
+    this.push(var1);
+    if (var2 != null) {
+        this.jarHandler = var2.createURLStreamHandler("jar");
+    }
+}    
 
 // 代码片段2
 public URL findResource(String var1, boolean var2) {
-        int[] var4 = this.getLookupCache(var1);
-
-        URLClassPath.Loader var3;
-        // 之前所述的 URLClassLoader 按照实例时传递的 URLs 的顺序搜索资源的功能由这里保证
-        // 由于 所有 URLClassPath.Loader  的顺序和 URL[] 一致，所以循环遍历查找时的循环顺序即是按照 URL[] 的顺序查找
-        // 当两个路径下存在相同的resource 时，会优先返回靠前 url 的资源
-        for(int var5 = 0; (var3 = this.getNextLoader(var4, var5)) != null; ++var5) {
-            // 如果 URLClassPath.Loader 的实现为 JarLoader ，findResource 其实就是调用 jar.getJarEntry 方法查找 resource
-            URL var6 = var3.findResource(var1, var2);
-            if (var6 != null) {
-                return var6;
-            }
+    int[] var4 = this.getLookupCache(var1);
+    URLClassPath.Loader var3;
+    // 之前所述的 URLClassLoader 按照实例时传递的 URLs 的顺序搜索资源的功能由这里保证
+    // 由于 所有 URLClassPath.Loader  的顺序和 URL[] 一致，所以循环遍历查找时的循环顺序即是按照 URL[] 的顺序查找
+    // 当两个路径下存在相同的resource 时，会优先返回靠前 url 的资源
+    for(int var5 = 0; (var3 = this.getNextLoader(var4, var5)) != null; ++var5) {
+        // 如果 URLClassPath.Loader 的实现为 JarLoader ，findResource 其实就是调用 jar.getJarEntry 方法查找 resource
+        URL var6 = var3.findResource(var1, var2);
+        if (var6 != null) {
+            return var6;
         }
-
-        return null;
     }
+    return null;
+}
 ```
 
 ##### f. URLClassLoader findResources
@@ -382,45 +374,40 @@ public URL findResource(String var1, boolean var2) {
 * 遍历 index 拿到所有的 URLClassPath.Loader ，并不断遍历查找所有包含 resource 的 URL
 */ 
 public Enumeration<URL> findResources(final String var1, final boolean var2) {
-        return new Enumeration<URL>() {
-            private int index = 0;
-            private int[] cache = URLClassPath.this.getLookupCache(var1);
-            private URL url = null;
-
-            private boolean next() {
-                if (this.url != null) {
-                    return true;
-                } else {
-                   // 不断遍历查找下一个包含属性的 URL
-                    do {
-                        URLClassPath.Loader var1x;
-                        if ((var1x = URLClassPath.this.getNextLoader(this.cache, this.index++)) == null) {
-                            return false;
-                        }
-
-                        // 这里调用的是 URLClassPath.Loader 的 findResource 方法            
-                        this.url = var1x.findResource(var1, var2);
-                    } while(this.url == null);
-
-                    return true;
-                }
+    return new Enumeration<URL>() {
+        private int index = 0;
+        private int[] cache = URLClassPath.this.getLookupCache(var1);
+        private URL url = null;
+        private boolean next() {
+            if (this.url != null) {
+                return true;
+            } else {
+               // 不断遍历查找下一个包含属性的 URL
+                do {
+                    URLClassPath.Loader var1x;
+                    if ((var1x = URLClassPath.this.getNextLoader(this.cache, this.index++)) == null) {
+                        return false;
+                    }
+                    // 这里调用的是 URLClassPath.Loader 的 findResource 方法            
+                    this.url = var1x.findResource(var1, var2);
+                } while(this.url == null);
+                return true;
             }
-
-            public boolean hasMoreElements() {
-                return this.next();
+        }
+        public boolean hasMoreElements() {
+            return this.next();
+        }
+        public URL nextElement() {
+            if (!this.next()) {
+                throw new NoSuchElementException();
+            } else {
+                URL var1x = this.url;
+                this.url = null;
+                return var1x;
             }
-
-            public URL nextElement() {
-                if (!this.next()) {
-                    throw new NoSuchElementException();
-                } else {
-                    URL var1x = this.url;
-                    this.url = null;
-                    return var1x;
-                }
-            }
-        };
-    }
+        }
+    };
+}
 ```
 
 ##### g. URLClassLoader 的 findClass 
@@ -434,39 +421,38 @@ URLClassLoader 继承了 ClassLoader ，其未重写 LoadClass ，代表其默�
 * defineClass 方法会根据查找到的字节码解析为实际的 Class。
 
 ```java
-    protected Class<?> findClass(final String name)
-        throws ClassNotFoundException
-    {
-        final Class<?> result;
-        try {
-            result = AccessController.doPrivileged(
-                new PrivilegedExceptionAction<Class<?>>() {
-                    public Class<?> run() throws ClassNotFoundException {
-                    
-                        // 不同点1
-                        String path = name.replace('.', '/').concat(".class");
-                        // 不同点2
-                        Resource res = ucp.getResource(path, false);
-                        if (res != null) {
-                            try {
-                                // 不同点3
-                                return defineClass(name, res);
-                            } catch (IOException e) {
-                                throw new ClassNotFoundException(name, e);
-                            }
-                        } else {
-                            return null;
+protected Class<?> findClass(final String name)
+    throws ClassNotFoundException
+{
+    final Class<?> result;
+    try {
+        result = AccessController.doPrivileged(
+            new PrivilegedExceptionAction<Class<?>>() {
+                public Class<?> run() throws ClassNotFoundException {
+                    // 不同点1
+                    String path = name.replace('.', '/').concat(".class");
+                    // 不同点2
+                    Resource res = ucp.getResource(path, false);
+                    if (res != null) {
+                        try {
+                            // 不同点3
+                            return defineClass(name, res);
+                        } catch (IOException e) {
+                            throw new ClassNotFoundException(name, e);
                         }
+                    } else {
+                        return null;
                     }
-                }, acc);
-        } catch (java.security.PrivilegedActionException pae) {
-            throw (ClassNotFoundException) pae.getException();
-        }
-        if (result == null) {
-            throw new ClassNotFoundException(name);
-        }
-        return result;
+                }
+            }, acc);
+    } catch (java.security.PrivilegedActionException pae) {
+        throw (ClassNotFoundException) pae.getException();
     }
+    if (result == null) {
+        throw new ClassNotFoundException(name);
+    }
+    return result;
+}
 ```
 
 针对上面所说的第二点不同，由于 URLClassPath 最终交给 URLClassPath.Loader 加载，而 URLClassPath.Loader 的 findResource 和 getResource 本质上并无不同，只不过是前者直接返回拼接的 URL，后者返回这个URL 的流 InputStream。
@@ -478,29 +464,27 @@ URLClassLoader 继承了 ClassLoader ，其未重写 LoadClass ，代表其默�
 SpringBoot 创建完自身使用的 LaunchedURLClassLoader 后，通过查找 MANIFEST 中的 Start-Class（也就是存在 @SpringBootApplication 注解的启动类） ，并执行 Start-Class 中的 main 方法。
 
 ```java
-    // 其中 classLoader 参数为创建的 LaunchedURLClassLoader
-	protected void launch(String[] args, String mainClass, ClassLoader classLoader)
-			throws Exception {
-
-		// 设置当前线程的类加载器为创建的 LaunchedURLClassLoader
-		Thread.currentThread().setContextClassLoader(classLoader);
-		// run 的逻辑见下方代码片段
-		createMainMethodRunner(mainClass, args, classLoader).run();
-	}
+// 其中 classLoader 参数为创建的 LaunchedURLClassLoader
+protected void launch(String[] args, String mainClass, ClassLoader classLoader)
+		throws Exception {
+	// 设置当前线程的类加载器为创建的 LaunchedURLClassLoader
+	Thread.currentThread().setContextClassLoader(classLoader);
+	// run 的逻辑见下方代码片段
+	createMainMethodRunner(mainClass, args, classLoader).run();
+}
 ```
 
 通过创建的 LaunchedURLClassLoader 加载 Start-Class，并执行 SpringBoot 应用启动入口main方法。在加载 Start-Class 后，一系列其它这个类引用的类的加载也随即触发，通过 LaunchedURLClassLoader 或者其父 ClassLoader 加载，从而所有触发所有的被引用到的类的加载。
 
 ```java
-	public void run() throws Exception {
-
-		// 加载 Start-Class。此时会触发其它被引用到的类的加载。
-		Class<?> mainClass = Thread.currentThread().getContextClassLoader()
-				.loadClass(this.mainClassName);
-		Method mainMethod = mainClass.getDeclaredMethod("main", String[].class);
-		// 执行 SpringBoot 的入口方法
-		mainMethod.invoke(null, new Object[] { this.args });
-	}
+public void run() throws Exception {
+	// 加载 Start-Class。此时会触发其它被引用到的类的加载。
+	Class<?> mainClass = Thread.currentThread().getContextClassLoader()
+			.loadClass(this.mainClassName);
+	Method mainMethod = mainClass.getDeclaredMethod("main", String[].class);
+	// 执行 SpringBoot 的入口方法
+	mainMethod.invoke(null, new Object[] { this.args });
+}
 ```
 
 
