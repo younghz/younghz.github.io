@@ -231,16 +231,16 @@ protected boolean isNestedArchive(Archive.Entry entry) {
 关于上面「代码片段3」中所说的 jarFile 的 entries 是有序的，且顺序为 entry 写入顺序问题，可以通过 vi 这个 jar包确认。SpringBoot 的测试类 `JarLauncherTests` 中，有生成 jarFile 的工具类，可以修改代码调整 entry 的写入顺序，下面是两种调整前后的对生成 jar 包 vi 的结果。
 
 <p style="text-align:center">
-<img src="../resource/java_classloader/jar-file-entry-1.jpg"  width="300"/>
+<img src="../resource/java_classloader/jar-file-entry-1.jpg"  width="200"/>
 </p>
 <p style="text-align:center">
-<img src="../resource/java_classloader/jar-file-entry-2.jpg"  width="300"/>
+<img src="../resource/java_classloader/jar-file-entry-2.jpg"  width="200"/>
 </p>
 
 从 spring boot 生成的 FatJar 的 vi 结果看，其 Entry 顺序如下。
 
 <p style="text-align:center">
-<img src="../resource/java_classloader/spring-boot-fatjar.jpg"  width="400"/>
+<img src="../resource/java_classloader/spring-boot-fatjar.jpg"  width="600"/>
 </p>
 
 classpath 结论：
