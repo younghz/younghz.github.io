@@ -4,7 +4,7 @@ title: "【T】SpringApplication核心流程与扩展"
 ---
 
 <p style="text-align:center">
-<img src="../resource/springapplication_core_process/wj.jpg"  width="500"/>
+<img src="../resource/springapplication_core_process/wj.jpg"  width="700"/>
 </p>
 
 * 目录

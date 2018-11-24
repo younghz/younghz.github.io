@@ -26,10 +26,10 @@ Spoon 就是代码生成器的一种（也可以用作运行时反射接口的�
 <img src="../resource/java_metaprogramming/annotation_processing.jpg"  width="500"/>
 </p>
 
-* 1. javac对源代码进行分析，生成一棵抽象语法树(AST) 
-* 2. 运行过程中调用实现了"JSR 269 API"的A程序
-* 3. 此时A程序就可以完成它自己的逻辑，包括修改第一步骤得到的抽象语法树(AST)
-* 4. javac使用修改后的抽象语法树(AST)生成字节码文件
+1. javac对源代码进行分析，生成一棵抽象语法树(AST) 
+2. 运行过程中调用实现了"JSR 269 API"的A程序
+3. 此时A程序就可以完成它自己的逻辑，包括修改第一步骤得到的抽象语法树(AST)
+4. javac使用修改后的抽象语法树(AST)生成字节码文件
 
 使用例子：
 * lombok。
