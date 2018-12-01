@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【RT】走心"
+title: "【RT】Focused and hard work"
 ---
 
 

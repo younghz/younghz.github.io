@@ -8,6 +8,7 @@ Thumbs.db
 
 .rbenv-version
 .rvmrc
+.idea/*
 
 .sass-cache/*
 Gemfile.lock

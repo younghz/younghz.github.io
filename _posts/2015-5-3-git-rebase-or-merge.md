@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】和而不同，git rebase 和 git merge.md"
+title: "【T】Git rebase or merge?"
 ---
 
 

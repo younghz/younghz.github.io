@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】关于高可用，这些就够了"
+title: "【T】High availability"
 ---
 
 * 目录
