@@ -5,5 +5,7 @@ title: About
 
 **Campus**: HEU    
 **Email**: younghaizhi@gmail.com    
-**Company**: MT
+
+[douban](https://www.douban.com/people/145308660/)
+
 

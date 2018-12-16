@@ -3,6 +3,9 @@ layout: post
 title: "【T】Java data access tools development"
 ---
 
+* 目录
+{:toc}
+
 与缓存不同，数据库存储的数据通常是 schema 化的，这就意味着 DB Object 需要 Maping 为 Java 应用中 Object 才能使用，在获取 Object 之前，Java 查询方法也需要 mapping 为数据库查询语言 SQL。ORM 框架的功能就是将上面两步操作自动化、简便化。
 
 Java 应用数据获取工具从最原始的 JDBC 到 ORM 框架，在到建立在二者之上的读写分离、分库分表中间件发展路径，当前成熟的方案通常是如下链路的封装。
