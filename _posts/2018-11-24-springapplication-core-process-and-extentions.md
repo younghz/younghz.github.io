@@ -391,6 +391,6 @@ __c. 配置的资源如 .properties 文件怎样、什么时候加载到 Environ
 * BeanFactoryPostProcessor：注册 Bean定义或者 custom modification of an application context's bean definitions。
 * BeanDefinitionRegistryPostProcessor：registration of further bean definitions before regular BeanFactoryPostProcessor。
 * BeanPostProcessor：对 Bean 实例进行修改，如 `checking for marker interfaces or wrapping them with proxies`。
-* ImportBeanDefinitionRegistrar：用于注册额外的 Bean，由 BeanDefinitionRegistryPostProcessor 处理。
+* ImportBeanDefinitionRegistrar：用于注册额外的 Bean，由 ConfigurationClassParser 处理。
 * 各种 Aware。
 
