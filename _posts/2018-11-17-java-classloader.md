@@ -497,3 +497,4 @@ public void run() throws Exception {
 * [Oracle 的 ClassLoader 文档](https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html)
 * [Oracle 的 ClassPath 文档](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html)
 * [深入探讨 Java 类加载器(IBM)](https://www.ibm.com/developerworks/cn/java/j-lo-classloader/index.html)
+* [SpringBoot 可执行Jar官方文档](https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html#executable-jar-jar-file-structure)
