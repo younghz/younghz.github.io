@@ -3,18 +3,9 @@ layout: post
 title: "【T】监控 Agent 技术点"
 ---
 
-TODO
-
-对外暴露XMonitor，包含供用户使用的api。
-
-* 维护在进程中的是XMonitorAgent。其中使用ScheduledExecutorService定时进行任务调度。
-* 其中任务是串行收集、上报信息。
-* 其中收集和上报分别实现各自基类IXMonitorCollector和IXMonitorStore。
-* 其中串行是通过遍历List< IXMonitorCollector>和List< IXMonitorStore>的接口方法实现。
-
-
-其他：
-
-* Atomic Number使用。
-* 使用Properties类获取配置文件配置。
-* 通过XXWarper包装基类，使用extends，使其更易用。
+1. 抽象 collector -> store
+2. MBean MxBean ManagementFactory JMX，jconsole
+3. Durid,c3p0 内部都注册了 MXBean，方便第三方监控
+4. 初始化 synchronized
+5. 实时直接统计，累积reset and get
+6. 队列，随机上报 HttpAgentSender
