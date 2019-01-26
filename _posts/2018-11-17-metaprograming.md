@@ -80,10 +80,10 @@ javac 扫描源文件和 class 文件找到所有存在的注解，并查找对�
 
 处理器扩展的核心类为 [Processor](https://docs.oracle.com/javase/7/docs/api/javax/annotation/processing/Processor.html)。
 
-> __Processor 流程__
+> __Processor 流程__    
 > Annotation processing happens in a sequence of rounds. On each round, a processor may be asked to process a subset of the annotations found on the source and class files produced by a prior round. The inputs to the first round of processing are the initial inputs to a run of the tool; these initial inputs can be regarded as the output of a virtual zeroth round of processing. If a processor was asked to process on a given round, it will be asked to process on subsequent rounds, including the last round, even if there are no annotations for it to process. The tool infrastructure may also ask a processor to process files generated implicitly by the tool's operation.
 > 
-> __javac 对 Processor 的调用流程__
+> __javac 对 Processor 的调用流程__    
 > Each implementation of a Processor must provide a public no-argument constructor to be used by tools to instantiate the processor. The tool infrastructure will interact with classes implementing this interface as follows:
 > 
 > 1. If an existing Processor object is not being used, to create an instance of a processor the tool calls the no-arg constructor of the processor class.
@@ -103,7 +103,7 @@ javac 扫描源文件和 class 文件找到所有存在的注解，并查找对�
 > 
 > If the methods that return configuration information about the annotation processor return null, return other invalid input, or throw an exception, the tool infrastructure must treat this as an error condition.
 > 
-> __Processor 最佳实践建议__
+> __Processor 最佳实践建议__    
 > To be robust when running in different tool implementations, an annotation processor should have the following properties:
 > 
 > The result of processing a given input is not a function of the presence or absence of other inputs (orthogonality).
