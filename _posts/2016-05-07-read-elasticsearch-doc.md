@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】Read elastic search doc"
+title: "Read elastic search doc"
 ---
 
 官方的doc无疑是最有价值的。
