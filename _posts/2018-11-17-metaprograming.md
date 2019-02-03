@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】Java metaprograming"
+title: "Java metaprograming"
 ---
 
 * 目录

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】Apache Maven"
+title: "Apache Maven"
 ---
 
 ----------

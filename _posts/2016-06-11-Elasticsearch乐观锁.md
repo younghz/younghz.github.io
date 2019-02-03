@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】Elasticsearch 乐观锁"
+title: "Elasticsearch 乐观锁"
 ---
 
 > 并发啊？    

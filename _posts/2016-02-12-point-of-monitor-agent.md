@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】监控 Agent 技术点"
+title: "监控 Agent 技术点"
 ---
 
 1. 抽象 collector -> store

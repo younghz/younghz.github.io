@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【RT】Focused and hard work"
+title: "Focused and hard work"
 ---
 
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【RT】做个好员工做个好Leader"
+title: "做个好员工做个好Leader"
 ---
 
 * 目录

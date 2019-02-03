@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】算法"
+title: "算法"
 ---
 
 * 目录

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】High availability"
+title: "High availability"
 ---
 
 * 目录

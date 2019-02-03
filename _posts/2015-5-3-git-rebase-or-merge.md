@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】Git rebase or merge?"
+title: "Git rebase or merge?"
 ---
 
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】技术文档写作规范与写作模板"
+title: "技术文档写作规范与写作模板"
 ---
 
 ![write](../resource/tech_article_style_guide/write.jpeg)

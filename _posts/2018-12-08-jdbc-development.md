@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】Java data access tools development"
+title: "Java data access tools development"
 ---
 
 * 目录

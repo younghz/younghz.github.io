@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】软件测试"
+title: "软件测试"
 ---
 
 * 目录

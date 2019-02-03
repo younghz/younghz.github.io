@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【RT】2017校招总结"
+title: "2017校招总结"
 ---
 
 ![图书馆](../resource/campus_recruitment/HEU_Library.JPG)

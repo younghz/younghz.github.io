@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】Java classLoader"
+title: "Java classLoader"
 ---
 
 <p style="text-align:center">

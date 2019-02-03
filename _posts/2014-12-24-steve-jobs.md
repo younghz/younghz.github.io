@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【Book】史蒂夫乔布斯传"
+title: "史蒂夫乔布斯传"
 ---
 
 看完了乔布斯传，从其本人和apple公司两方面总结一下。

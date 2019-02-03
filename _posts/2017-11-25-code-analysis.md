@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】Java代码分析与工具"
+title: "Java代码分析与工具"
 ---
 
 * 目录

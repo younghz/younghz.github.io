@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】SpringApplication核心流程与扩展"
+title: "SpringApplication核心流程与扩展"
 ---
 
 <p style="text-align:center">

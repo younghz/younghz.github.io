@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【RT】new
+title: new
 ---
 
 mt, I am coming!    

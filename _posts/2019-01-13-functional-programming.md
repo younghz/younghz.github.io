@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】函数式编程"
+title: "函数式编程"
 ---
 
 * 目录

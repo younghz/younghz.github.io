@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】Elasticsearch 缓存"
+title: "Elasticsearch 缓存"
 ---
 
 ## 1 Filter cache

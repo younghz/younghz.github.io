@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【T】保险"
+title: "保险"
 ---
 
 <p style="text-align:center">
