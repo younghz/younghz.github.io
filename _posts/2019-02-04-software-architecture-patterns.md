@@ -3,6 +3,9 @@ layout: post
 title: "软件架构模式"
 ---
 
+* 目录
+{:toc}
+
 在软件开发领域，「模式」是固定情景下的最佳实践方式的总结，像 Facade/Adaptor/Proxy 等软件设计模式一样，同样存在软件架构模式，[Software Architecture Patterns](https://book.douban.com/subject/26797547/) 一书中总结了常用的软件架构模式，并在性能、伸缩性、可测试性等几方面对比了不同设计模式的优点缺点。
 
 什么是架构呢？架构是针对 __系统特点__ 选择最优 __架构模式__ 的过程。所以架构的流程是：
