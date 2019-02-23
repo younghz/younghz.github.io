@@ -108,7 +108,7 @@ optional解决也是依赖传递的问题，如：A->B，B->C（optional），�
 
 stackoverflow(https://stackoverflow.com/questions/40393098/when-to-use-optionaltrue-optional-and-when-to-use-scopeprovided-scope) 上有对 optional 和 provided 区别的讨论。不过从根本上来讲，二者表达的不是同一类问题，optional关注的只是传递性依赖的问题，而 provided 更多关注的是当前依赖的有效范围的问题（在哪个classpath有效），在此基础上也要解决这种scope传递的问题。
 
-**（3）依赖解析**
+**（3）依赖解析 **
 
 概念：
 * 依赖路径。依赖路径是指依赖传递的关系，如A依赖B,B依赖C,那么依赖路径为：A->B->C。
@@ -154,18 +154,17 @@ Maven拥有相互独立的三套生命周期，分别是 clean、default、site�
 ## 3 进一步谈maven依赖机制
 
 ### 3.1 传递性依赖
+
 maven从2.0开始支持传递性依赖特性，希望解决的是传递性依赖「自动引入的问题」：
 
 > This allows you to avoid needing to discover and specify the libraries that your own dependencies require, and including them automatically.
 
-
-
 因为传递性依赖会造成项目依赖的爆炸性增长，所以maven存在一些额外的特性用来对依赖进行约束和限制：
 
 * 依赖调解（dependecy mediation）。这个基本比较明确，两个原则，「路径深度优先」，如果不足以进行决定，那么「声明顺序优先」。
-* 依赖管理（dependency management）。Dependency Management是集中管理依赖信息的一种机制。依赖管理是「directly specify the versions」在一下两方面：
-> * in transitive dependencies （针对于非公共依赖，如果在dependency management中定义，是为了显式指定版本）
-> * in dependencies where no version has been specified （解决多模块项目公共依赖的问题）
+* 依赖管理（dependency management）。Dependency Management是集中管理依赖信息的一种机制。依赖管理是「directly specify the versions」
+    * in transitive dependencies （注意只针对传递性依赖）（针对于非公共依赖，如果在dependency management中定义，是为了显式指定版本）
+    * in dependencies where no version has been specified （解决多模块项目公共依赖的问题）
 
 * 依赖范围（dependency scope）。
 * 依赖排除（exclude dependencies）。
@@ -178,9 +177,8 @@ maven从2.0开始支持传递性依赖特性，希望解决的是传递性依赖
 
 原则 & 优先级：
 
-* 大优先级：dependency management > dependency mediation。
-* 小优先级：dependency mediation 路径深度优先 > 声明顺序优先。声明顺序优先对于dependency management同样适用（对于import scope导入的pom）。
-
+* 优先级：dependency mediation 路径深度优先 > 声明顺序优先。声明顺序优先对于dependency management同样适用（对于import scope导入的pom）。
+* 针对 __传递性依赖__，在以上优先级的基础上，如果在 dependencyManagement 中指定了版本，那么会使用指定的版本。
 
 
 更详细的可以看下[官方文档](http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Management)，里面的例子很清晰。
