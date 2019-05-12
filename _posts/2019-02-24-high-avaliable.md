@@ -15,7 +15,7 @@ title: "高可用思考"
 
 
 <p style="text-align:center">
-<img src="../resource/high_aviliablity/high-aviliablity.png"  width="600"/>
+<img src="../resource/high_aviliablity/high-aviliablity.png"  width="300"/>
 </p>
 
 高可用不但需要在设计和技术实现上保证，也需要合理的流程辅助实现。
@@ -33,7 +33,7 @@ title: "高可用思考"
 ## 2.2 技术实现
 
 <p style="text-align:center">
-<img src="../resource/high_aviliablity/high_avilable_detail.png"  width="600"/>
+<img src="../resource/high_aviliablity/high_avilable_detail.png"  width="900"/>
 </p>
 
 

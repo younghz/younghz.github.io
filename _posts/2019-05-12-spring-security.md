@@ -85,7 +85,9 @@ int vote(Authentication authentication, S object,
 
 Spring security 在 web 层的实现是基于 Servlet 的 Filter，其实现是 `FilterChainProxy`，其架构如：
 
-//todo 这里是个图 https://spring.io/guides/topicals/spring-security-architecture 图2 图3
+<p style="text-align:center">
+<img src="../resource/spring_security/security-filters.png"  width="600"/>
+</p>
 
 可以通过 EnableWebSecurity 注解配置 Spring security, 这个注解通过配置 WebSecurityConfiguration 这个 configuration，
 通过你自定义（无自定义，使用默认）的 WebSecurityConfigurerAdapter 实现构造 FilterChainProxy。
