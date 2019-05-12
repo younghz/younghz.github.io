@@ -25,7 +25,9 @@ Debug 是问题排查最有效的方式之一。通常，在开发或者测试�
 
 每个角色又对应着不同的技术模块支撑，分别为 JVMTI/JDWP/JDI。如下。
 
-// todo 这里是个图。https://www.ibm.com/developerworks/cn/java/j-lo-jpda1/index.html?ca=drs-
+<p style="text-align:center">
+<img src="../resource/java_debug/jdwp.jpg"  width="600"/>
+</p>
 
 # 3 JPDA 体系
 

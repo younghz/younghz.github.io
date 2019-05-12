@@ -13,6 +13,11 @@ title: "高可用思考"
 
 可用性用可用性指标描述，即一般所说的「4个9」、「5个9」。可用性指标=(1-(系统不可用时间/一年总时间))x100%。一般来讲，「4个9」的一年不可用时间在1小时作用，「5个9」的不可用时间即为「4个9」的十分之一，在6分钟左右。
 
+
+<p style="text-align:center">
+<img src="../resource/high_aviliablity/high-aviliablity.png"  width="600"/>
+</p>
+
 高可用不但需要在设计和技术实现上保证，也需要合理的流程辅助实现。
 
 1. 架构设计
@@ -27,7 +32,10 @@ title: "高可用思考"
 
 ## 2.2 技术实现
 
-参考1.    2.
+<p style="text-align:center">
+<img src="../resource/high_aviliablity/high_avilable_detail.png"  width="600"/>
+</p>
+
 
 ## 2.3 流程保证
 
