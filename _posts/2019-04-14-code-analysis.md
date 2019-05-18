@@ -3,7 +3,7 @@ layout: post
 title: "代码分析"
 ---
 
-自己一次在组内关于「代码分析」的分享。
+自己一次关于「代码分析」的分享。
 
 <p style="text-align:center">
 <img src="../resource/code_analysis/代码分析.001.jpeg"  width="700"/>
