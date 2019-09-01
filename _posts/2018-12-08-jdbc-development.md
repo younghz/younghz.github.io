@@ -214,3 +214,61 @@ public class FooServiceImpl implements FooService {
 __总结__
 
 每个工具都在用自己的概念但是通用的思路解决不同的问题。了解概念才能更好的使用工具，熟悉思路与实现可以帮助扩展甚至编写自己的工具。
+
+
+# 7. 其它(事务)
+
+事务支持是 Spring 的核心功能之一，其为事务管理提供了一致性抽象。具体的文档可见：
+ https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html
+
+在实现原理上，事务操作基本都是模板代码且是基于源操作的 Around 包装，所以很适合使用 AOP 实现。下面是一个编程式事务实现的例子。
+
+```
+public class BankServiceImpl implements BankService {
+private BankDao bankDao;
+private TransactionDefinition txDefinition;
+private PlatformTransactionManager txManager;
+......
+public boolean transfer(Long fromId， Long toId， double amount) {
+TransactionStatus txStatus = txManager.getTransaction(txDefinition);
+boolean result = false;
+try {
+result = bankDao.transfer(fromId， toId， amount);
+txManager.commit(txStatus);
+} catch (Exception e) {
+result = false;
+txManager.rollback(txStatus);
+System.out.println("Transfer Error!");
+}
+return result;
+}
+}
+```
+
+既然是基于 AOP 实现，当出现对源操作的多层增强时，需要注意各层增强操作的执行顺序，特别是相互存在依赖关系的操作。比如一般会通过
+AbstractRoutingDataSource 实现动态数据源，如果动态数据源的操作最终是基于 AOP 应用的，而事务管理器也是依赖于 DataSource，
+所以需要切换数据源操作在事务应用之前执行。
+
+需要注意的是，Spring 只是对事务提供了
+一致性抽象而并非实现事务，底层事务实现还是数据库提供的功能，而这层功能的抽象 API 是数据库连接 Connection，如
+DataSourceTransactionManager提交事务的 commit 操作最终还是通过 Connection 的 commit 实现，如下。
+
+```java
+@Override
+protected void doCommit(DefaultTransactionStatus status) {
+DataSourceTransactionObject txObject = (DataSourceTransactionObject) status.getTransaction();
+Connection con = txObject.getConnectionHolder().getConnection();
+if (status.isDebug()) {
+logger.debug("Committing JDBC transaction on Connection [" + con + "]");
+}
+try {
+con.commit();
+}
+catch (SQLException ex) {
+throw new TransactionSystemException("Could not commit JDBC transaction", ex);
+}
+}
+```
+
+不难发现，其实所有数据访问相关的组件都是围绕 javax.sql.DataSource 规范进行的。连接池组件是 DataSource 的池化，MyBatis 的
+SqlSession 是基于 DataSource 的操作，事务是基于 DataSource 的抽象化包装。
