@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Netty:线程模型"
+title: "Netty:I/O 模型"
 ---
 
 * 目录
